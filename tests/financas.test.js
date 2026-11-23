@@ -73,3 +73,25 @@ test('removerLancamento remove apenas o lançamento escolhido', () => {
   assert.deepEqual(F.removerLancamento(lista, 'b'), [{ id: 'a' }, { id: 'c' }]);
   assert.equal(lista.length, 3, 'a lista original não deve ser alterada');
 });
+
+// Teste 9 — consulta com filtro por tipo (funcionalidade criada na branch feature/filtros)
+test('filtrarLancamentos mostra só receitas ou só despesas', () => {
+  const lista = [
+    { id: '1', valor: 10, tipo: 'receita', data: '2026-10-01' },
+    { id: '2', valor: 20, tipo: 'despesa', data: '2026-11-01' },
+    { id: '3', valor: 30, tipo: 'despesa', data: '2026-11-15' },
+  ];
+  assert.deepEqual(F.filtrarLancamentos(lista, { tipo: 'despesa' }).map((l) => l.id), ['2', '3']);
+  assert.deepEqual(F.filtrarLancamentos(lista, { tipo: 'todos' }).map((l) => l.id), ['1', '2', '3']);
+});
+
+// Teste 10 — consulta com filtro por mês
+test('filtrarLancamentos filtra pelo mês escolhido e combina com o tipo', () => {
+  const lista = [
+    { id: '1', valor: 10, tipo: 'receita', data: '2026-10-01' },
+    { id: '2', valor: 20, tipo: 'despesa', data: '2026-11-01' },
+    { id: '3', valor: 30, tipo: 'receita', data: '2026-11-15' },
+  ];
+  assert.deepEqual(F.filtrarLancamentos(lista, { mes: '2026-11' }).map((l) => l.id), ['2', '3']);
+  assert.deepEqual(F.filtrarLancamentos(lista, { mes: '2026-11', tipo: 'receita' }).map((l) => l.id), ['3']);
+});

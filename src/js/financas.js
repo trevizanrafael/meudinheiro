@@ -104,6 +104,16 @@
     return [...(lancamentos || [])].sort((a, b) => b.data.localeCompare(a.data));
   }
 
+  // Filtra a lista por tipo ("todos", "receita" ou "despesa") e por mês ("2026-11").
+  // Mês vazio = todos os meses.
+  function filtrarLancamentos(lancamentos, filtro) {
+    const tipo = (filtro && filtro.tipo) || 'todos';
+    const mes = (filtro && filtro.mes) || '';
+    return (lancamentos || []).filter((l) =>
+      (tipo === 'todos' || l.tipo === tipo) &&
+      (mes === '' || l.data.startsWith(mes + '-')));
+  }
+
   function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
@@ -116,6 +126,7 @@
     calcularResumo,
     removerLancamento,
     ordenarPorData,
+    filtrarLancamentos,
     formatarMoeda,
   };
 });

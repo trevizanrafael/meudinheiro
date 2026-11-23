@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- COmentário adicionado apenas para poder dar o nome certo ao commit (não queria usar git aqui pra mudar o nome kkkkkk) -->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -54,6 +55,18 @@
 
     <section class="painel">
       <h2>Lançamentos</h2>
+      <div class="filtros">
+        <label>Mostrar
+          <select id="filtro-tipo">
+            <option value="todos">Todos</option>
+            <option value="receita">Só receitas</option>
+            <option value="despesa">Só despesas</option>
+          </select>
+        </label>
+        <label>Mês
+          <input type="month" id="filtro-mes">
+        </label>
+      </div>
       <p id="lista-vazia" class="vazio">Nenhum lançamento cadastrado ainda.</p>
       <table id="tabela" hidden>
         <thead>
