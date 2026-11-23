@@ -1,0 +1,13 @@
+{
+  "name": "meudinheiro",
+  "version": "1.0.0",
+  "description": "Aplicação simples de controle financeiro (receitas, despesas e saldo) com pipeline CI/CD.",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test \"tests/**/*.test.js\""
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeuDinheiro — controle financeiro simples</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <h1>💰 MeuDinheiro</h1>
+    <p>Registre suas receitas e despesas e acompanhe o seu saldo.</p>
+  </header>
+
+  <main class="conteudo">
+    <section class="resumo" aria-label="Resumo financeiro">
+      <div class="cartao receita">
+        <span>Receitas</span>
+        <strong id="total-receitas">R$ 0,00</strong>
+      </div>
+      <div class="cartao despesa">
+        <span>Despesas</span>
+        <strong id="total-despesas">R$ 0,00</strong>
+      </div>
+      <div class="cartao saldo">
+        <span>Saldo</span>
+        <strong id="saldo">R$ 0,00</strong>
+      </div>
+    </section>
+
+    <section class="painel">
+      <h2>Novo lançamento</h2>
+      <form id="form-lancamento" novalidate>
+        <label>Descrição
+          <input type="text" id="descricao" placeholder="Ex.: Salário, Mercado, Ônibus" maxlength="60">
+        </label>
+        <label>Valor (R$)
+          <input type="text" id="valor" inputmode="decimal" placeholder="Ex.: 150,90">
+        </label>
+        <label>Tipo
+          <select id="tipo">
+            <option value="">Selecione…</option>
+            <option value="receita">Receita (entrada)</option>
+            <option value="despesa">Despesa (saída)</option>
+          </select>
+        </label>
+        <label>Data
+          <input type="date" id="data">
+        </label>
+        <ul id="erros" class="erros" role="alert"></ul>
+        <button type="submit">Adicionar</button>
+      </form>
+    </section>
+
+    <section class="painel">
+      <h2>Lançamentos</h2>
+      <p id="lista-vazia" class="vazio">Nenhum lançamento cadastrado ainda.</p>
+      <table id="tabela" hidden>
+        <thead>
+          <tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Valor</th><th></th></tr>
+        </thead>
+        <tbody id="lista"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <span id="versao">versão local</span> · Os dados ficam salvos apenas neste navegador.
+  </footer>
+
+  <script src="js/financas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
