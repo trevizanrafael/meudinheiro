@@ -12,7 +12,7 @@ Projeto prático **Operação Deploy** — disciplina *Gerência de Configuraç�
 | Integrante | Responsabilidades principais |
 |---|---|
 | Rafael Moraes Trevizan | Líder de integração, desenvolvimento, pipeline CI/CD |
-| Nicolly Kauana Ferreira | Desenvolvimento, testes automatizados, documentação e evidências |
+| Nicolly Kauana Ferreira | Testes e qualidade: correção da falha simulada, validação da aplicação publicada, revisão do relatório e das evidências |
 
 > As responsabilidades foram divididas, mas as duas pessoas revisaram e conhecem todo o projeto.
 
