@@ -4,15 +4,15 @@ Aplicação web simples de controle financeiro pessoal: registre **receitas** e 
 
 Projeto prático **Operação Deploy** — disciplina *Gerência de Configuração e Manutenção de Software*.
 
-🔗 **Aplicação publicada:** https://SEU-USUARIO.github.io/meudinheiro/
-🔗 **Execuções do pipeline:** https://github.com/SEU-USUARIO/meudinheiro/actions
+🔗 **Aplicação publicada:** https://trevizanrafael.github.io/meudinheiro/
+🔗 **Execuções do pipeline:** https://github.com/trevizanrafael/meudinheiro/actions
 
 ## Equipe
 
 | Integrante | Responsabilidades principais |
 |---|---|
-| NOME 1 | Líder de integração, desenvolvimento, pipeline CI/CD |
-| NICOLE SOBRENOME | Desenvolvimento, testes automatizados, documentação e evidências |
+| Rafael Moraes Trevizan | Líder de integração, desenvolvimento, pipeline CI/CD |
+| Nicolly Kauana Ferreira | Desenvolvimento, testes automatizados, documentação e evidências |
 
 > As responsabilidades foram divididas, mas as duas pessoas revisaram e conhecem todo o projeto.
 
