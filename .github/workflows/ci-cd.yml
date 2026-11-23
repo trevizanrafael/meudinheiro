@@ -1,0 +1,63 @@
+# Pipeline CI/CD do MeuDinheiro
+#
+# Fluxo:  push/pull request  ->  [build-e-testes]  ->  [publicar]
+#
+#  - build-e-testes (CI): roda em QUALQUER branch e em pull requests.
+#    Faz o build, executa os testes e, se tudo passar, guarda o artefato (pasta dist/).
+#  - publicar (CD): só roda na branch main e SÓ SE o job anterior passar
+#    (por causa do "needs"). Se um teste falhar, este job é pulado (skipped)
+#    e a versão que está no ar continua sendo a anterior.
+
+name: CI-CD MeuDinheiro
+
+on:
+  push:
+    branches: ["**"]        # qualquer push, em qualquer branch, dispara o CI
+  pull_request:
+    branches: [main]        # pull requests para a main também são verificados
+  workflow_dispatch:        # permite rodar manualmente pela aba Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-e-testes:
+    name: CI - build e testes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar o Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build (verifica arquivos e gera dist/)
+        run: npm run build
+
+      - name: Testes automatizados
+        run: npm test
+
+      - name: Guardar o artefato de entrega (dist/)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    name: CD - publicar no GitHub Pages
+    needs: build-e-testes   # só começa se o CI passou
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publicar o artefato aprovado
+        id: deploy
+        uses: actions/deploy-pages@v4
