@@ -37,6 +37,8 @@
   const corpoTabela = document.getElementById('lista');
   const tabela = document.getElementById('tabela');
   const vazio = document.getElementById('lista-vazia');
+  const filtroTipo = document.getElementById('filtro-tipo');
+  const filtroMes = document.getElementById('filtro-mes');
 
   function hoje() {
     const d = new Date();
@@ -60,8 +62,13 @@
   }
 
   // ---------- desenho da tela ----------
+  function lancamentosFiltrados() {
+    return F.filtrarLancamentos(lancamentos, { tipo: filtroTipo.value, mes: filtroMes.value });
+  }
+
+  // O resumo considera o mês escolhido no filtro (ou todos os meses).
   function renderizarResumo() {
-    const r = F.calcularResumo(lancamentos);
+    const r = F.calcularResumo(F.filtrarLancamentos(lancamentos, { mes: filtroMes.value }));
     document.getElementById('total-receitas').textContent = F.formatarMoeda(r.receitas);
     document.getElementById('total-despesas').textContent = F.formatarMoeda(r.despesas);
     const saldo = document.getElementById('saldo');
@@ -70,10 +77,13 @@
   }
 
   function renderizarLista() {
-    const visiveis = F.ordenarPorData(lancamentos);
+    const visiveis = F.ordenarPorData(lancamentosFiltrados());
     corpoTabela.innerHTML = '';
     tabela.hidden = visiveis.length === 0;
     vazio.hidden = visiveis.length > 0;
+    vazio.textContent = lancamentos.length === 0
+      ? 'Nenhum lançamento cadastrado ainda.'
+      : 'Nenhum lançamento encontrado para este filtro.';
 
     visiveis.forEach((l) => {
       const tr = document.createElement('tr');
@@ -138,6 +148,10 @@
     campos.descricao.focus();
     renderizar();
   });
+
+  // ---------- filtros ----------
+  filtroTipo.addEventListener('change', renderizar);
+  filtroMes.addEventListener('change', renderizar);
 
   // ---------- versão publicada (gerada pelo pipeline) ----------
   fetch('version.json', { cache: 'no-store' })
