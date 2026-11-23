@@ -90,7 +90,7 @@
     return {
       receitas: receitas / 100,
       despesas: despesas / 100,
-      saldo: (receitas - despesas) / 100,
+      saldo: (receitas + despesas) / 100,
     };
   }
 
